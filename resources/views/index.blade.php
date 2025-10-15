@@ -9,311 +9,304 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         body { font-family: 'Inter', sans-serif; }
-        .pinterest-grid {
-            columns: 4 300px;
-            column-gap: 1.5rem;
-            padding: 2rem 0;
-        }
-        .pinterest-grid > * {
-            break-inside: avoid;
-            margin-bottom: 1.5rem;
-            background: white;
-            border-radius: 0.5rem;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-        }
-        .pinterest-grid > *:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-        }
-        @media (max-width: 1024px) { .pinterest-grid { columns: 3 250px; } }
-        @media (max-width: 768px) { .pinterest-grid { columns: 2 200px; } }
-        @media (max-width: 480px) { .pinterest-grid { columns: 1 100%; } }
-        .fade-in { animation: fadeIn 0.6s ease-out; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .search-overlay {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: white;
-            border-radius: 0 0 0.5rem 0.5rem;
-            max-height: 200px;
-            overflow-y: auto;
-            z-index: 10;
-            display: none;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .search-overlay.show { display: block; }
-        .pin-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(255, 215, 0, 0.9);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            color: black;
-            font-size: 1.5rem;
-        }
-        .pin-overlay.show { display: flex; }
         .yellow-accent { color: #FFD700; }
         .gray-text { color: #6B7280; }
         .black-bg { background: #000; }
         .white-bg { background: white; }
-        
-        /* Marquee Animation - Perbaikan untuk infinite loop yang benar-benar smooth */
-        .marquee-container {
-            overflow: hidden;
-            margin-top: 4rem;
-            position: relative;
-            background: linear-gradient(to right, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(255,255,255,0.1) 100%);
-            padding: 1rem 0;
+        .hero-section {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), transparent), url('https://upload.wikimedia.org/wikipedia/commons/4/4f/Raden_Saleh_-_Diponegoro_arrest.jpg') center/cover;
+            background-attachment: fixed;
         }
-        .marquee-wrapper {
-            display: flex;
-            width: fit-content;
+        .article-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1rem;
         }
-        .marquee-content {
-            display: flex;
-            animation: marquee 40s linear infinite;
+        .article-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
         }
-        .marquee-item {
-            width: 140px;
-            height: 140px;
-            margin-right: 1.5rem;
-            border-radius: 1rem;
-            overflow: hidden;
-            flex-shrink: 0;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        .article-subtitle {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 3rem;
+            color: #4B5563;
         }
-        .marquee-item:hover {
-            transform: scale(1.1) rotate(2deg);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-        }
-        .marquee-item img {
+        .article-image {
             width: 100%;
-            height: 100%;
+            height: 300px;
             object-fit: cover;
-            filter: grayscale(100%) brightness(0.8);
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        .marquee-item:hover img {
-            filter: grayscale(0%) brightness(1);
-        }
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-100%); }
-        }
-        /* Pause on hover for smoother interaction */
-        .marquee-container:hover .marquee-content {
-            animation-play-state: paused;
-        }
-        
-        /* Perbaikan layout grid untuk foto */
-        .featured-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-auto-rows: minmax(150px, auto);
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        .featured-grid > * {
             border-radius: 0.5rem;
-            overflow: hidden;
-            position: relative;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin: 2.5rem 0;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
         }
-        .featured-grid > *:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        .article-paragraph {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: #374151;
+            text-align: justify;
         }
-        .featured-grid img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: grayscale(100%);
-            transition: filter 0.3s ease;
+        .article-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 3rem;
+            flex-wrap: wrap;
         }
-        .featured-grid > *:hover img {
-            filter: grayscale(0%);
-        }
-        .grid-item-1 {
-            grid-column: span 2;
-            grid-row: span 2;
-        }
-        .grid-item-2, .grid-item-3, .grid-item-5 {
-            grid-column: span 1;
-            grid-row: span 1;
-        }
-        .grid-item-4 {
-            grid-column: span 2;
-            grid-row: span 1;
-        }
-        .grid-item-6 {
-            grid-column: span 1;
-            grid-row: span 2;
-        }
-        .grid-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-            color: white;
-            padding: 1rem;
-            transform: translateY(5px);
-            opacity: 0;
+        .article-buttons button {
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 0.5rem;
             transition: all 0.3s ease;
+            min-width: 150px;
         }
-        .featured-grid > *:hover .grid-caption {
-            transform: translateY(0);
-            opacity: 1;
+        .hero-text {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.7);
         }
-        
-        /* Responsive grid */
+        .quote-box {
+            background: linear-gradient(135deg, #fffaf0, #fef5e7);
+            border-left: 4px solid #FFD700;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin: 3rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+        .quote-box blockquote {
+            font-style: italic;
+            font-size: 1.3rem;
+            color: #8B4513;
+            margin: 0 0 1rem 0;
+            position: relative;
+            line-height: 1.5;
+        }
+        .quote-box blockquote::before {
+            content: '"';
+            font-size: 4rem;
+            color: #FFD700;
+            position: absolute;
+            left: -0.5rem;
+            top: -0.5rem;
+            opacity: 0.8;
+            font-family: serif;
+        }
+        .quote-author {
+            text-align: right;
+            font-weight: 600;
+            color: #6B7280;
+            font-size: 1rem;
+            margin: 0;
+        }
+        .timeline {
+            background: #f8f9fa;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            margin: 3rem 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 40px;
+            bottom: 20px;
+            width: 2px;
+            background: #FFD700;
+            z-index: 0;
+        }
+        .timeline h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: #FFD700;
+            display: flex;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            background: transparent;
+        }
+        .timeline-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+            padding-left: 0;
+        }
+        .timeline-icon {
+            width: 12px;
+            height: 12px;
+            background: #FFD700;
+            border-radius: 50%;
+            margin-right: 1rem;
+            margin-top: 0.5rem;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 2;
+        }
+        .timeline-text {
+            flex: 1;
+            color: #374151;
+            font-size: 1rem;
+            line-height: 1.6;
+            background: transparent;
+            padding: 0;
+        }
+        .fact-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            margin: 3rem 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        .fact-box h4 {
+            color: #856404;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            font-size: 1.25rem;
+        }
+        .fact-list {
+            list-style: none;
+            padding: 0;
+        }
+        .fact-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #ffeaa7;
+            color: #856404;
+            font-size: 1rem;
+            line-height: 1.6;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        .fact-list li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: #FFD700;
+        }
+        .fact-list li:last-child {
+            border-bottom: none;
+        }
+        .section-padding {
+            padding: 4rem 0;
+        }
         @media (max-width: 768px) {
-            .featured-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .grid-item-1, .grid-item-4 {
-                grid-column: span 2;
-            }
-            .grid-item-6 {
-                grid-column: span 2;
-                grid-row: span 1;
-            }
-        }
-        @media (max-width: 480px) {
-            .featured-grid {
-                grid-template-columns: 1fr;
-            }
-            .grid-item-1, .grid-item-4, .grid-item-6 {
-                grid-column: span 1;
-            }
+            .hero-section { py-20; }
+            .hero-text h2 { font-size: 3rem; }
+            .hero-text h1 { font-size: 4rem; }
+            .article-title { font-size: 2rem; margin-bottom: 0.75rem; }
+            .article-subtitle { font-size: 1.1rem; margin-bottom: 2rem; }
+            .article-paragraph { font-size: 1rem; margin-bottom: 1.5rem; }
+            .article-image { height: 250px; margin: 2rem 0; }
+            .article-buttons { flex-direction: column; align-items: center; gap: 0.75rem; }
+            .quote-box { padding: 1.5rem; margin: 2rem 0; }
+            .quote-box blockquote { font-size: 1.1rem; }
+            .quote-box blockquote::before { font-size: 3rem; top: -0.75rem; }
+            .timeline { padding: 1.5rem; margin: 2rem 0; }
+            .timeline::after { left: 15px; }
+            .timeline h4 { font-size: 1.1rem; margin-bottom: 1.5rem; }
+            .timeline-item { flex-direction: column; align-items: flex-start; }
+            .timeline-icon { margin-right: 0; margin-bottom: 0.5rem; margin-left: 15px; }
+            .timeline-text { background: none; padding: 0; }
+            .fact-box { padding: 1.5rem; margin: 2rem 0; }
+            .fact-list li { padding-left: 1.5rem; font-size: 0.95rem; }
+            .section-padding { padding: 2rem 0; }
         }
     </style>
 </head>
 <body class="bg-white text-black min-h-screen">
     <!-- Header -->
-    <header class="bg-white sticky top-0 z-50 border-b border-gray-200">
+    <header class="bg-white sticky top-0 z-50 border-b border-gray-200 shadow-sm">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-2">
                 <h1 class="text-2xl font-bold yellow-accent">Pahlawan</h1>
                 <span class="text-yellow-500">•</span>
+                <span class="text-sm font-medium">Sejarah Indonesia</span>
             </div>
-            <ul class="flex space-x-8 text-gray-600">
-                <li><a href="#feed" class="hover:text-black transition">Galeri</a></li>
-                <li><a href="#artikel" class="hover:text-black transition">Artikel</a></li>
-                <li><a href="#" class="hover:text-black transition">Kisah</a></li>
-            </ul>
-            <div class="relative flex items-center space-x-4">
-                <div class="relative">
-                    <input type="text" id="searchInput" placeholder="Cari pahlawan..." class="px-4 py-2 border border-gray-300 rounded-lg outline-none w-48 focus:w-64 transition-all duration-300 text-sm">
-                    <i class="fas fa-search absolute right-3 top-3 text-gray-400"></i>
-                    <div id="searchResults" class="search-overlay">
-                        <!-- Hasil pencarian akan diisi oleh JS -->
-                    </div>
-                </div>
-                <div class="flex items-center space-x-2 text-sm">
-                    <button class="bg-yellow-500 text-black px-3 py-1 rounded font-medium hover:bg-yellow-400 transition">Premium</button>
-                    <i class="fas fa-bell text-gray-400"></i>
-                    <i class="fas fa-user-circle text-gray-400"></i>
-                </div>
+            <div class="flex items-center space-x-4">
+                <i class="fas fa-user-circle text-gray-400 text-xl"></i>
             </div>
         </nav>
     </header>
 
     <!-- Hero Section -->
-    <section class="relative py-20 bg-white">
-        <div class="container mx-auto px-6 text-center">
-            <div class="max-w-4xl mx-auto">
-                <h2 class="text-6xl font-bold mb-4 leading-tight">SELAMAT DATANG DI</h2>
-                <h1 class="text-7xl font-bold mb-8 yellow-accent">PAHLAWAN SEJARAH</h1>
-                <p class="text-xl gray-text mb-12 max-w-2xl mx-auto">Platform eksklusif untuk memamerkan kisah kepahlawanan sejarah dari para tokoh bangsa Indonesia. Jelajahi galeri dan artikel inspiratif.</p>
+    <section class="hero-section text-center text-white relative section-padding">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto hero-text">
+                <h2 class="text-5xl font-bold mb-4 leading-tight">SELAMAT DATANG DI</h2>
+                <h1 class="text-6xl font-bold mb-8">PAHLAWAN SEJARAH</h1>
+                <p class="text-xl mb-12 max-w-2xl mx-auto">Fokus pada kisah kepahlawanan Perang Diponegoro: Perlawanan heroik melawan penjajah Belanda yang menginspirasi nasionalisme modern.</p>
                 <div class="flex justify-center space-x-6">
-                    <button onclick="loadMorePins()" class="black-bg text-white px-8 py-4 rounded-lg font-semibold hover:opacity-90 transition">Jelajahi Kisah</button>
-                    <button class="border border-black text-black px-8 py-4 rounded-lg font-semibold hover:bg-black hover:text-white transition">Gabung Komunitas</button>
-                </div>
-            </div>
-            <!-- Marquee Animation - Perbaikan untuk infinite loop yang smooth -->
-            <div class="marquee-container">
-                <div class="marquee-wrapper">
-                    <div class="marquee-content" id="marquee-content">
-                        <!-- Gambar akan diisi oleh JavaScript -->
-                    </div>
+                    <button onclick="document.querySelector('.article-section').scrollIntoView({behavior: 'smooth'});" class="black-bg text-white px-8 py-4 rounded-lg font-semibold hover:opacity-90 transition">Jelajahi Kisah</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Featured Grid (Inspired by reference) -->
-    <section class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <h3 class="text-3xl font-bold mb-12 text-center black">Kisah Unggulan</h3>
-            
-            <!-- Grid Layout yang Lebih Terstruktur -->
-            <div class="featured-grid">
-                <div class="grid-item-1 bg-gray-100">
-                    <img src="https://picsum.photos/800/600?random=1" alt="Proklamasi">
-                    <div class="grid-caption">
-                        <h4 class="text-2xl font-bold">Proklamasi</h4>
-                        <p class="text-sm">Soekarno</p>
-                    </div>
+    <!-- Artikel Section -->
+    <section class="bg-white section-padding">
+        <div class="article-section">
+            <h1 class="article-title yellow-accent">Pangeran Diponegoro: Pemimpin Perang Jawa</h1>
+            <p class="article-subtitle">Perlawanan Heroik Melawan Penjajah Belanda (1825-1830)</p>
+
+            <div class="quote-box">
+                <blockquote>Aku adalah pejuang! Sebagai pejuang, tugasku adalah berjuang. Soal kalah atau menang, itu bukan urusanku, karena tugasku adalah berjuang!</blockquote>
+                <p class="quote-author">- Pangeran Diponegoro</p>
+            </div>
+
+            <img src="https://i.pinimg.com/736x/78/19/09/781909c53d60e8c72817cc0ed5363181.jpg" alt="Pangeran Diponegoro" class="article-image">
+
+            <p class="article-paragraph">Pangeran Diponegoro, lahir pada 11 November 1785 di Yogyakarta, adalah seorang bangsawan Jawa yang menjadi simbol perjuangan melawan kolonialisme Belanda. Ia memimpin Perang Jawa, salah satu pemberontakan terbesar di Hindia Belanda, yang berlangsung dari 1825 hingga 1830. Perang ini melibatkan jutaan rakyat Jawa dan menyebabkan kerugian besar bagi pihak Belanda, termasuk biaya perang yang mencapai ratusan juta gulden.</p>
+
+            <div class="timeline">
+                <h4><i class="fas fa-timeline mr-2"></i>Garis Waktu Perang Jawa</h4>
+                <div class="timeline-item">
+                    <div class="timeline-icon"></div>
+                    <div class="timeline-text"><strong>1785:</strong> Kelahiran Pangeran Diponegoro di Yogyakarta.</div>
                 </div>
-                <div class="grid-item-2 bg-gray-100">
-                    <img src="https://picsum.photos/400/300?random=2" alt="Diponegoro">
-                    <div class="grid-caption">
-                        <h4 class="font-semibold">Perang Jawa</h4>
-                        <p class="text-sm">Diponegoro</p>
-                    </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon"></div>
+                    <div class="timeline-text"><strong>20 Juli 1825:</strong> Dimulainya perlawanan dengan pengiriman pasukan Belanda untuk menangkap Diponegoro.</div>
                 </div>
-                <div class="grid-item-3 bg-gray-100">
-                    <img src="https://picsum.photos/400/300?random=3" alt="Kartini">
-                    <div class="grid-caption">
-                        <h4 class="font-semibold">Emansipasi</h4>
-                        <p class="text-sm">Kartini</p>
-                    </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon"></div>
+                    <div class="timeline-text"><strong>1825-1830:</strong> Pertempuran gerilya di Jawa Tengah dan Timur, melibatkan jutaan rakyat.</div>
                 </div>
-                <div class="grid-item-4 bg-gray-100">
-                    <img src="https://picsum.photos/800/400?random=4" alt="Gerilya">
-                    <div class="grid-caption">
-                        <h4 class="text-2xl font-bold">Gerilya Aceh</h4>
-                        <p class="text-sm">Cut Nyak Dhien</p>
-                    </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon"></div>
+                    <div class="timeline-text"><strong>28 Maret 1830:</strong> Diponegoro ditangkap melalui tipu muslihat dan diasingkan ke Makassar.</div>
                 </div>
-                <div class="grid-item-5 bg-gray-100">
-                    <img src="https://picsum.photos/400/300?random=5" alt="Hatta">
-                    <div class="grid-caption">
-                        <h4 class="font-semibold">Ekonomi Bangsa</h4>
-                        <p class="text-sm">Hatta</p>
-                    </div>
-                </div>
-                <div class="grid-item-6 bg-gray-100">
-                    <img src="https://picsum.photos/400/600?random=6" alt="Gajah Mada">
-                    <div class="grid-caption">
-                        <h4 class="text-xl font-bold">Sumpah Palapa</h4>
-                        <p class="text-sm">Gajah Mada</p>
-                    </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon"></div>
+                    <div class="timeline-text"><strong>1855:</strong> Wafatnya Pangeran Diponegoro di pengasingan.</div>
                 </div>
             </div>
 
-            <!-- Pinterest-style Feed -->
-            <div id="feed" class="pinterest-grid">
-                <!-- Pins akan diisi oleh JS -->
+            <p class="article-paragraph">Latar belakang perlawanan Diponegoro berakar pada ketidakpuasan terhadap kebijakan Belanda yang merampas tanah dan mengganggu tradisi keagamaan. Diponegoro, yang dikenal sebagai ulama dan pemimpin spiritual, melihat perjuangan ini sebagai jihad suci. Strategi gerilya yang inovatifnya memungkinkan pasukannya bertahan di pegunungan dan hutan Jawa Tengah, membuat Belanda kesulitan menekan pemberontakan.</p>
+
+            <img src="https://sultansinindonesieblog.wordpress.com/wp-content/uploads/2020/07/perang-diiponegoro-pp.jpg" alt="Pertempuran Perang Jawa" class="article-image">
+
+            <p class="article-paragraph">Meskipun akhirnya ditangkap melalui tipu muslihat pada 1830 dan diasingkan ke Makassar hingga wafatnya pada 1855, warisan Diponegoro tetap hidup. Perang Jawa menjadi inspirasi bagi gerakan nasionalisme Indonesia modern, menunjukkan kekuatan rakyat bersatu melawan penindas. Kisahnya mengajarkan nilai ketabahan, iman, dan semangat kemerdekaan yang tak tergoyahkan.</p>
+
+            <div class="fact-box">
+                <h4><i class="fas fa-lightbulb mr-2"></i>Fakta Menarik</h4>
+                <ul class="fact-list">
+                    <li>Perang Jawa menguras biaya Belanda hingga 200 juta gulden, setara dengan hutang besar bagi kerajaan Belanda.</li>
+                    <li>Diponegoro memimpin pasukan hingga 200.000 orang pada puncak perlawanan.</li>
+                    <li>Perang ini menjadi inspirasi bagi pemberontakan selanjutnya di Indonesia melawan kolonialisme.</li>
+                </ul>
             </div>
-            <div id="loading" class="text-center mt-8 hidden">
-                <i class="fas fa-spinner fa-spin text-yellow-500 text-2xl"></i>
-                <p class="gray-text mt-2">Memuat kisah lebih banyak...</p>
+
+            <div class="article-buttons">
+                <button onclick="shareArticle()" class="border border-black text-black hover:bg-black hover:text-white transition">
+                    <i class="fas fa-share mr-2"></i>Bagikan Kisah
+                </button>
             </div>
         </div>
     </section>
@@ -321,15 +314,14 @@
     <!-- Footer -->
     <footer class="bg-gray-900 text-white py-12 mt-20">
         <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div class="col-span-1 md:col-span-2">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
                     <h3 class="text-2xl font-bold yellow-accent mb-4">Pahlawan Sejarah</h3>
-                    <p class="gray-text mb-6">Platform untuk mengenang dan mempelajari kisah kepahlawanan tokoh-tokoh bangsa Indonesia. Inspirasi dari masa lalu untuk masa depan.</p>
+                    <p class="gray-text mb-6">Platform untuk mengenang kisah kepahlawanan tokoh-tokoh bangsa Indonesia. Inspirasi dari masa lalu untuk masa depan.</p>
                     <div class="flex space-x-4">
                         <a href="#" class="text-gray-400 hover:text-yellow-500 transition"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="text-gray-400 hover:text-yellow-500 transition"><i class="fab fa-twitter"></i></a>
                         <a href="#" class="text-gray-400 hover:text-yellow-500 transition"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-yellow-500 transition"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
                 <div>
@@ -337,7 +329,6 @@
                     <ul class="space-y-2 text-gray-400">
                         <li><a href="#" class="hover:text-yellow-500 transition">Galeri Pahlawan</a></li>
                         <li><a href="#" class="hover:text-yellow-500 transition">Artikel Sejarah</a></li>
-                        <li><a href="#" class="hover:text-yellow-500 transition">Kontribusi</a></li>
                         <li><a href="#" class="hover:text-yellow-500 transition">Tentang Kami</a></li>
                     </ul>
                 </div>
@@ -347,7 +338,6 @@
                         <li><i class="fas fa-envelope mr-2"></i>info@pahlawansejarah.id</li>
                         <li><i class="fas fa-phone mr-2"></i>+62 21 12345678</li>
                         <li><a href="#" class="hover:text-yellow-500 transition">Kebijakan Privasi</a></li>
-                        <li><a href="#" class="hover:text-yellow-500 transition">Syarat Layanan</a></li>
                     </ul>
                 </div>
             </div>
@@ -357,253 +347,29 @@
         </div>
     </footer>
 
-    <!-- Modal -->
-    <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-lg max-w-4xl max-h-screen overflow-y-auto w-full text-black relative">
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 text-2xl hover:text-black transition">&times;</button>
-            <div id="modal-content" class="p-8">
-                <!-- Konten modal akan diisi oleh JS -->
-            </div>
-        </div>
-    </div>
-
     <!-- Toast -->
     <div id="toast" class="fixed bottom-4 right-4 bg-yellow-500 text-black px-6 py-3 rounded-lg shadow-lg hidden z-50 font-medium">
-        Kisah disimpan!
+        Tautan disalin!
     </div>
 
     <script>
-        // Data heroes (dengan gambar dummy Picsum)
-        const allHeroes = [
-            {
-                id: 'sukarno',
-                title: "Ir. Soekarno",
-                image: "https://picsum.photos/400/600?random=7",
-                type: 'galeri',
-                desc: "Proklamator Kemerdekaan: Kisah perjuangan bangsa.",
-                content: `
-                    <img src="https://picsum.photos/800/400?random=8" alt="Soekarno" class="w-full h-64 object-cover rounded mb-6 grayscale">
-                    <h2 class="text-3xl font-bold mb-4 yellow-accent">Ir. Soekarno: Bapak Bangsa</h2>
-                    <p class="mb-4 gray-text">Ir. Soekarno lahir pada 6 Juni 1901 di Surabaya. Ia memproklamasikan kemerdekaan Indonesia pada 17 Agustus 1945 bersama Mohammad Hatta.</p>
-                    <p class="mb-4 gray-text">Visi Pancasila-nya menjadi dasar negara, dan Konferensi Asia-Afrika 1955 memperkuat peran Indonesia di dunia.</p>
-                    <p class="mb-6 gray-text">Semangat persatuan yang ia junjung tetap menginspirasi hingga kini.</p>
-                    <div class="flex space-x-4 mt-6">
-                        <button onclick="savePin('sukarno')" class="bg-black text-white px-4 py-2 rounded hover:opacity-90 transition"><i class="fas fa-save mr-2"></i>Simpan</button>
-                        <button onclick="sharePin('sukarno')" class="border border-black text-black px-4 py-2 rounded hover:bg-black hover:text-white transition"><i class="fas fa-share mr-2"></i>Bagikan</button>
-                    </div>
-                `
-            },
-            {
-                id: 'diponegoro',
-                title: "Pangeran Diponegoro",
-                image: "https://picsum.photos/400/500?random=9",
-                type: 'artikel',
-                desc: "Pemimpin Perang Jawa: 5 tahun perlawanan heroik.",
-                content: `
-                    <img src="https://picsum.photos/800/400?random=10" alt="Diponegoro" class="w-full h-64 object-cover rounded mb-6 grayscale">
-                    <h2 class="text-3xl font-bold mb-4 yellow-accent">Pangeran Diponegoro: Pejuang Islam</h2>
-                    <p class="mb-4 gray-text">Pangeran Diponegoro (1785-1855) memimpin perlawanan melawan Belanda dari 1825-1830, melibatkan jutaan rakyat Jawa.</p>
-                    <p class="mb-4 gray-text">Strategi gerilya dan semangat jihadnya menjadi inspirasi nasionalisme modern.</p>
-                    <p class="mb-6 gray-text">Diasingkan ke Makassar, warisannya abadi sebagai simbol perjuangan.</p>
-                    <div class="flex space-x-4 mt-6">
-                        <button onclick="savePin('diponegoro')" class="bg-black text-white px-4 py-2 rounded hover:opacity-90 transition"><i class="fas fa-save mr-2"></i>Simpan</button>
-                        <button onclick="sharePin('diponegoro')" class="border border-black text-black px-4 py-2 rounded hover:bg-black hover:text-white transition"><i class="fas fa-share mr-2"></i>Bagikan</button>
-                    </div>
-                `
-            },
-            // Tambahkan lebih banyak data jika diperlukan, dengan Picsum random
-            {
-                id: 'kartini',
-                title: "R.A. Kartini",
-                image: "https://picsum.photos/400/600?random=11",
-                type: 'galeri',
-                desc: "Pelopor Emansipasi: Surat-surat inspiratif.",
-                content: `
-                    <img src="https://picsum.photos/800/400?random=12" alt="Kartini" class="w-full h-64 object-cover rounded mb-6 grayscale">
-                    <h2 class="text-3xl font-bold mb-4 yellow-accent">R.A. Kartini: Suara Perempuan</h2>
-                    <p class="mb-4 gray-text">Raden Ajeng Kartini (1879-1904) memperjuangkan pendidikan dan hak perempuan melalui surat-suratnya 'Habis Gelap Terbitlah Terang'.</p>
-                    <p class="mb-6 gray-text">Ia mendirikan sekolah pertama untuk wanita di Jepara, menjadi inspirasi Hari Kartini.</p>
-                    <div class="flex space-x-4 mt-6">
-                        <button onclick="savePin('kartini')" class="bg-black text-white px-4 py-2 rounded hover:opacity-90 transition"><i class="fas fa-save mr-2"></i>Simpan</button>
-                        <button onclick="sharePin('kartini')" class="border border-black text-black px-4 py-2 rounded hover:bg-black hover:text-white transition"><i class="fas fa-share mr-2"></i>Bagikan</button>
-                    </div>
-                `
-            }
-        ];
-
-        let currentPins = [];
-        let savedPins = JSON.parse(localStorage.getItem('savedPins')) || [];
-        let loadedCount = 0;
-        const pinsPerLoad = 3;
-
-        // Inisialisasi Marquee dengan infinite loop yang benar-benar smooth
-        function initMarquee() {
-            const marqueeContent = document.getElementById('marquee-content');
-            const images = [
-                'https://picsum.photos/140/140?random=1',
-                'https://picsum.photos/140/140?random=2',
-                'https://picsum.photos/140/140?random=3',
-                'https://picsum.photos/140/140?random=4',
-                'https://picsum.photos/140/140?random=5',
-                'https://picsum.photos/140/140?random=6',
-                'https://picsum.photos/140/140?random=7',
-                'https://picsum.photos/140/140?random=8'
-            ];
-            
-            // Duplikasi gambar untuk membuat efek loop yang mulus
-            const duplicatedImages = [...images, ...images, ...images];
-            
-            marqueeContent.innerHTML = duplicatedImages.map((img, index) => 
-                `<div class="marquee-item"><img src="${img}" alt="Image ${index + 1}"></div>`
-            ).join('');
-        }
-
-        // Render pin (dengan grayscale filter)
-        function renderPin(hero, index) {
-            const isSaved = savedPins.includes(hero.id);
-            const pinClass = hero.type === 'galeri' ? 'h-72' : 'max-h-96 overflow-hidden';
-            const descClass = hero.type === 'galeri' ? 'text-sm mb-0' : 'text-sm mb-4';
-            const hasButton = hero.type === 'artikel';
-
-            return `
-                <div class="w-full ${pinClass}" onclick="openModal('${hero.id}')" style="animation-delay: ${index * 0.2}s;">
-                    <div class="pin-overlay" id="overlay-${hero.id}">
-                        <i class="fas fa-eye"></i>
-                    </div>
-                    <img src="${hero.image}" alt="${hero.title}" class="w-full object-cover grayscale hover:grayscale-0 transition">
-                    <div class="p-4">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-lg font-semibold">${hero.title}</h3>
-                            <button onclick="event.stopPropagation(); savePin('${hero.id}')" class="text-yellow-500 hover:text-yellow-700 transition">
-                                <i class="fas fa-${isSaved ? 'heart' : 'heart-o'}"></i>
-                            </button>
-                        </div>
-                        <p class="${descClass} gray-text">${hero.desc}</p>
-                        ${hasButton ? `<button class="yellow-accent text-sm font-medium mt-2 hover:underline">Baca Lebih Lanjut</button>` : ''}
-                    </div>
-                </div>
-            `;
-        }
-
-        // Load initial
-        function loadInitialPins() {
-            currentPins = allHeroes.slice(0, pinsPerLoad);
-            document.getElementById('feed').innerHTML = currentPins.map((hero, index) => renderPin(hero, index)).join('');
-            addFadeIn();
-        }
-
-        // Load more
-        function loadMorePins() {
-            const loading = document.getElementById('loading');
-            loading.classList.remove('hidden');
-            setTimeout(() => {
-                const nextPins = allHeroes.slice(loadedCount, loadedCount + pinsPerLoad);
-                if (nextPins.length > 0) {
-                    document.getElementById('feed').innerHTML += nextPins.map((hero, index) => renderPin(hero, currentPins.length + index)).join('');
-                    currentPins = currentPins.concat(nextPins);
-                    loadedCount += pinsPerLoad;
-                    addFadeIn();
-                }
-                loading.classList.add('hidden');
-            }, 1200);
-        }
-
-        function addFadeIn() {
-            document.querySelectorAll('#feed > div').forEach((pin, index) => {
-                pin.classList.add('fade-in');
-            });
-        }
-
-        // Search
-        document.getElementById('searchInput').addEventListener('input', function(e) {
-            const query = e.target.value.toLowerCase();
-            const results = document.getElementById('searchResults');
-            if (query.length < 2) {
-                results.classList.remove('show');
-                return;
-            }
-            const filtered = allHeroes.filter(hero => hero.title.toLowerCase().includes(query) || hero.desc.toLowerCase().includes(query));
-            results.innerHTML = filtered.slice(0, 5).map(hero => `
-                <div class="p-3 border-b border-gray-200 cursor-pointer hover:bg-gray-50" onclick="openModal('${hero.id}'); document.getElementById('searchInput').value=''; results.classList.remove('show');">
-                    <h4 class="font-semibold yellow-accent">${hero.title}</h4>
-                    <p class="text-sm gray-text">${hero.desc}</p>
-                </div>
-            `).join('');
-            results.classList.add('show');
-        });
-
-        // Modal functions
-        function openModal(heroId) {
-            const hero = allHeroes.find(h => h.id === heroId);
-            if (hero) {
-                document.getElementById('modal-content').innerHTML = hero.content;
-                document.getElementById('modal').classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-            }
-        }
-
-        function closeModal() {
-            document.getElementById('modal').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Save & Share
-        function savePin(id) {
-            if (savedPins.includes(id)) {
-                savedPins = savedPins.filter(p => p !== id);
-            } else {
-                savedPins.push(id);
-                showToast();
-            }
-            localStorage.setItem('savedPins', JSON.stringify(savedPins));
-            location.reload(); // Sederhana untuk update icon
-        }
-
-        function sharePin(id) {
-            const hero = allHeroes.find(h => h.id === id);
+        // Share Article
+        function shareArticle() {
+            const title = 'Pangeran Diponegoro: Pemimpin Perang Jawa';
             if (navigator.share) {
-                navigator.share({ title: hero.title, url: window.location.href });
+                navigator.share({ title: title, url: window.location.href });
             } else {
-                navigator.clipboard.writeText(hero.title + ' - ' + window.location.href);
+                navigator.clipboard.writeText(title + ' - ' + window.location.href);
                 showToast('Tautan disalin!');
             }
         }
 
-        function showToast(msg = 'Kisah disimpan!') {
+        function showToast(msg = 'Tautan disalin!') {
             const toast = document.getElementById('toast');
             toast.textContent = msg;
             toast.classList.remove('hidden');
             setTimeout(() => toast.classList.add('hidden'), 2500);
         }
-
-        // Events
-        document.getElementById('modal').addEventListener('click', (e) => { if (e.target === this) closeModal(); });
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', (e) => {
-                e.preventDefault();
-                document.querySelector(anchor.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-            });
-        });
-
-        // Hover overlay
-        document.addEventListener('mouseover', (e) => {
-            if (e.target.closest('.pinterest-grid > div')) {
-                const pin = e.target.closest('.pinterest-grid > div');
-                const overlay = pin.querySelector('.pin-overlay');
-                if (overlay) overlay.classList.add('show');
-            }
-        });
-        document.addEventListener('mouseout', (e) => {
-            if (e.target.closest('.pinterest-grid > div')) {
-                const pin = e.target.closest('.pinterest-grid > div');
-                const overlay = pin.querySelector('.pin-overlay');
-                if (overlay) overlay.classList.remove('show');
-            }
-        });
-
-        // Init
-        initMarquee();
-        loadInitialPins();
     </script>
 </body>
 </html>
