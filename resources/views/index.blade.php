@@ -275,28 +275,17 @@
 
             <p class="article-paragraph">Pangeran Diponegoro, lahir pada 11 November 1785 di Yogyakarta, adalah seorang bangsawan Jawa yang menjadi simbol perjuangan melawan kolonialisme Belanda. Ia memimpin Perang Jawa, salah satu pemberontakan terbesar di Hindia Belanda, yang berlangsung dari 1825 hingga 1830. Perang ini melibatkan jutaan rakyat Jawa dan menyebabkan kerugian besar bagi pihak Belanda, termasuk biaya perang yang mencapai ratusan juta gulden.</p>
 
-            <div class="timeline">
-                <h4><i class="fas fa-timeline mr-2"></i>Garis Waktu Perang Jawa</h4>
-                <div class="timeline-item">
-                    <div class="timeline-icon"></div>
-                    <div class="timeline-text"><strong>1785:</strong> Kelahiran Pangeran Diponegoro di Yogyakarta.</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-icon"></div>
-                    <div class="timeline-text"><strong>20 Juli 1825:</strong> Dimulainya perlawanan dengan pengiriman pasukan Belanda untuk menangkap Diponegoro.</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-icon"></div>
-                    <div class="timeline-text"><strong>1825-1830:</strong> Pertempuran gerilya di Jawa Tengah dan Timur, melibatkan jutaan rakyat.</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-icon"></div>
-                    <div class="timeline-text"><strong>28 Maret 1830:</strong> Diponegoro ditangkap melalui tipu muslihat dan diasingkan ke Makassar.</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-icon"></div>
-                    <div class="timeline-text"><strong>1855:</strong> Wafatnya Pangeran Diponegoro di pengasingan.</div>
-                </div>
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 mb-10 rounded-md">
+                <h3 class="font-semibold text-yellow-600 mb-4 flex items-center">
+                    <i class="fas fa-clock mr-2"></i> Garis Waktu Perang Jawa
+                </h3>
+                <ul class="space-y-2 text-gray-700">
+                    <li>🔸 1785: Kelahiran Pangeran Diponegoro di Yogyakarta.</li>
+                    <li>🔸 20 Juli 1825: Dimulainya perlawanan besar terhadap Belanda.</li>
+                    <li>🔸 1825–1830: Pertempuran gerilya di Jawa Tengah dan Timur.</li>
+                    <li>🔸 28 Maret 1830: Diponegoro ditangkap dan diasingkan ke Makassar.</li>
+                    <li>🔸 1855: Wafatnya Pangeran Diponegoro di pengasingan.</li>
+                </ul>
             </div>
 
             <p class="article-paragraph">Latar belakang perlawanan Diponegoro berakar pada ketidakpuasan terhadap kebijakan Belanda yang merampas tanah dan mengganggu tradisi keagamaan. Diponegoro, yang dikenal sebagai ulama dan pemimpin spiritual, melihat perjuangan ini sebagai jihad suci. Strategi gerilya yang inovatifnya memungkinkan pasukannya bertahan di pegunungan dan hutan Jawa Tengah, membuat Belanda kesulitan menekan pemberontakan.</p>
