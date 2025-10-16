@@ -327,7 +327,7 @@
                 <div>
                     <h4 class="font-semibold mb-4 yellow-accent">Tautan Cepat</h4>
                     <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-yellow-500 transition">Galeri Pahlawan</a></li>
+                        <li><a href="galeri.blade.php;" class="hover:text-yellow-500 transition">Galeri Pahlawan</a></li>
                         <li><a href="#" class="hover:text-yellow-500 transition">Artikel Sejarah</a></li>
                         <li><a href="#" class="hover:text-yellow-500 transition">Tentang Kami</a></li>
                     </ul>
