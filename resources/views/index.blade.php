@@ -243,7 +243,18 @@
                 <h1 class="text-6xl font-bold mb-8">PAHLAWAN SEJARAH</h1>
                 <p class="text-xl mb-12 max-w-2xl mx-auto">Fokus pada kisah kepahlawanan Perang Diponegoro: Perlawanan heroik melawan penjajah Belanda yang menginspirasi nasionalisme modern.</p>
                 <div class="flex justify-center space-x-6">
-                    <button onclick="document.querySelector('.article-section').scrollIntoView({behavior: 'smooth'});" class="black-bg text-white px-8 py-4 rounded-lg font-semibold hover:opacity-90 transition">Jelajahi Kisah</button>
+                    <button 
+                        onclick="document.querySelector('.article-section').scrollIntoView({behavior: 'smooth'});" 
+                        class="black-bg text-white px-8 py-4 rounded-lg font-semibold hover:opacity-90 transition">
+                        Jelajahi Kisah
+                    </button>
+
+    
+                    <button 
+                        onclick="window.location.href='{{ url('/artikel') }}';"
+                        class="bg-yellow-400 text-black px-8 py-4 rounded-lg font-semibold hover:bg-yellow-500 transition">
+                        Artikel Lainnya
+                    </button>
                 </div>
             </div>
         </div>
@@ -328,7 +339,7 @@
                     <h4 class="font-semibold mb-4 yellow-accent">Tautan Cepat</h4>
                     <ul class="space-y-2 text-gray-400">
                         <li><a href="#" class="hover:text-yellow-500 transition">Galeri Pahlawan</a></li>
-                        <li><a href="#" class="hover:text-yellow-500 transition">Artikel Sejarah</a></li>
+                        <li><a href="artikel.blade.php" class="hover:text-yellow-500 transition">Artikel Sejarah</a></li>
                         <li><a href="#" class="hover:text-yellow-500 transition">Tentang Kami</a></li>
                     </ul>
                 </div>
